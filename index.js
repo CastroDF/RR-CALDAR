@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const express = require('express');
 const app = express();
 const port = 3000;
@@ -12,6 +11,3 @@ app.get('/usuarios', function (req, res){
 app.listen(port, () => {
     console.log('Radium app listening at http://localhost:${port}');
 })
-=======
-console.log("Hi");
->>>>>>> 65a603cd1c926ad68856355e1de5764cb885a750
