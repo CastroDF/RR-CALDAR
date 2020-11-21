@@ -11,7 +11,9 @@ const users = require('./data/person-data.js');
 })*/
 
 app.get('/usuarios', (req, res) =>  res.json(users));
-
+app.get('/usuarios/:id', (req, res) => {
+    res.json(users.filter(user => user.id === parseInt(req.params.id)));
+});
 
 app.listen(port, () => {
     console.log('Radium app listening at http://localhost: ${port} ');
