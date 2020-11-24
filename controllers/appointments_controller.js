@@ -32,7 +32,12 @@ router.get('/appointments/delete/:id', (req, res) => {
     }
 });
 
-router.get('/appointments/edit/:id/:clave/:valor', (req, res) => {
+//ex. http://localhost:3000/appointments/edit/1?stock=1
+app.get('/appointments/edit/:id', (req, res) => {
+    const query = req.query;
+    const params = req.params; 
+    const prop = Object.getOwnPropertyNames(req.query);
+    const value = Object.values(req.query);
     const found = appointments.some(appointment => appointment.id === parseInt(req.params.id));
     if(found){
         var index = appointments.map((appointment) => appointment.id ).indexOf(parseInt(req.params.id));
