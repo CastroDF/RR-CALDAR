@@ -1,0 +1,24 @@
+{
+  "name": "RR-CALDAR",
+  "version": "1.0.0",
+  "description": "An app to manage operators designed for websites.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CastroDF/RR-CALDAR.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CastroDF/RR-CALDAR/issues"
+  },
+  "homepage": "https://github.com/CastroDF/RR-CALDAR#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "uuid": "^8.3.1"
+  }
+}
