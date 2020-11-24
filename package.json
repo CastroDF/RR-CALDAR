@@ -1,7 +1,7 @@
 {
   "name": "rr-caldar",
   "version": "1.0.0",
-  "description": "## What is it about?",
+  "description": "## An app to manage operators designed for websites.",
   "main": "index.js",
   "scripts": {
     "start": "nodemon ./index.js",
