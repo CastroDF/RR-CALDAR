@@ -32,22 +32,67 @@ router.get('/appointments/delete/:id', (req, res) => {
     }
 });
 
-//ex. http://localhost:3000/appointments/edit/1?boiderId=1
-app.get('/appointments/edit/:id', (req, res) => {
-    const query = req.query;
-    const params = req.params; 
-    const prop = Object.getOwnPropertyNames(req.query);
-    const value = Object.values(req.query);
-    const found = appointments.some(appointment => appointment.id === parseInt(req.params.id));
-    if(found){
-        var index = appointments.map((appointment) => appointment.id ).indexOf(parseInt(req.params.id));
-        if (index !== -1) {
-            appointments[index][req.params.clave] = req.params.valor;
-        }
-    }else{
-        res.status(400).json({msg: `No member with the id of ${req.params.id}`});
+
+app.get("/getAppointmentsBySkillsId/:buildingId", (req, res) => {
+    const buildingIdNum = parseInt(req.params.buildingId);
+    const found = appointments.some(appointments => {
+        appointments.buildingId.includes(buildingIdNum)
+    });
+
+    if (found) {
+        res.json(appointments.filter(appointments => {
+            appointments.buildingId.includes(buildingIdNum)
+        }))
+    } else {
+        res.status(400).json({ msg: `No boiler type with the buildingId id of ${req.params.buildingId}` })
     }
 });
+
+
+app.get("/getAppointmentaByDescription/:boilerId", (req, res) => {
+    const found = appointments.some(appointments => {
+        appointments.boilerId === parseInt(req.params.boilerId)
+    });
+
+    if (found) {
+        res.json(appointments.filter(appointments => {
+            appointments.boilerId === parseInt(req.params.boilerId)
+        }))
+    } else {
+        res.status(400).json({ msg: `No boiler type with the boilerId of ${req.params.boilerId}` })
+    }
+});
+
+
+app.get("/getAppointmentsByStock/:start_timestamp", (req, res) => {
+    const found = appointments.some(appointments => {
+        appointments.start_timestamp === req.params.start_timestamp;
+    });
+
+    if (found) {
+        res.json(appointments.filter(appointments => {
+            appointments.start_timestamp === req.params.start_timestamp;
+        }));
+    } else {
+        res.status(400).json({ msg: `No boiler type with the start_timestamp of ${req.params.start_timestamp}` })
+    }
+});
+
+
+app.get("/getAppointmentsByStock/:end_timestamp", (req, res) => {
+    const found = appointments.some(appointments => {
+        appointments.end_timestamp === req.params.end_timestamp;
+    });
+
+    if (found) {
+        res.json(appointments.filter(appointments => {
+            appointments.end_timestamp === req.params.end_timestamp;
+        }));
+    } else {
+        res.status(400).json({ msg: `No boiler type with the stock of ${req.params.end_timestamp}` })
+    }
+});
+
 
 
 
