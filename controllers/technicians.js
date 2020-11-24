@@ -18,10 +18,9 @@ app.get('/technicians/getAll', (req, res) => {
 app.get('/technicians/getById/:id', (req, res, next) =>{
     const found = technicians.some(technical => technical.id === parseInt(req.params.id));
     if(found){
-        res.json(technicians.filter(technical => technical.id === parseInt(req.params.id)));//parsea porq devuelve un string 
+        res.json(technicians.filter(technical => technical.id === parseInt(req.params.id)));
     } else {
-        //next() 
-        res.status(400).json({msg: `Member not found ${req.params.id} `});//an answerwhen the response fail
+        res.status(400).json({msg: `Member not found ${req.params.id} `});
     }
 });
 
@@ -33,7 +32,7 @@ app.get('/technicians/getByAttribute/:type/:data', (req, res) =>{
             if(found){
                 res.json(technicians.filter(technical => technical.email === req.params.data));
             } else {
-                res.status(400).json({msg: `Member not found ${req.params.email} sale por aca`});
+                res.status(400).json({msg: `Member not found ${req.params.email}`});
             }
             break;
         case 'first_name':
@@ -94,7 +93,7 @@ app.get('/technicians/getByAttribute/:type/:data', (req, res) =>{
 app.delete('/technicians/delete/:id', (req, res) =>{
     const found = technicians.some(member => member.id === parseInt(req.params.id));
     if(found){
-        res.json({msg: 'Member deleted', technicians: technicians.filter(member => member.id !== parseInt(req.params.id))});//parsea porq devuelve un string 
+        res.json({msg: 'Member deleted', technicians: technicians.filter(member => member.id !== parseInt(req.params.id))});
     } else {
         res.status(400).json({msg: `Member not found ${req.params.id}`});
     }
