@@ -13,6 +13,6 @@
     "start": "node index_customers",
     "dev": "nodemon index_customers"
   },
-  "author": "",
+  "author": "FacundoDLF",
   "license": "ISC"
 }
