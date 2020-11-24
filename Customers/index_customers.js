@@ -23,7 +23,7 @@ app.get('/customers', (request, response) => {
 
     app.get('/customers/all', (request, response) => {
         console.log(__dirname)
-        response.sendFile(path.resolve(__dirname, 'data_customers.json'))
+        response.sendFile(path.resolve(__dirname, 'data_customers/data_customers.json'))
     });
 
 
