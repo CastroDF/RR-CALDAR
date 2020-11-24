@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const customers = require('./data_customers/data_customers.json');
-const PORT = process.env.PORT || 5000;
 
 
 app.listen(8080, () => {
