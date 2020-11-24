@@ -32,7 +32,7 @@ router.get('/appointments/delete/:id', (req, res) => {
     }
 });
 
-//ex. http://localhost:3000/appointments/edit/1?stock=1
+//ex. http://localhost:3000/appointments/edit/1?boiderId=1
 app.get('/appointments/edit/:id', (req, res) => {
     const query = req.query;
     const params = req.params; 
