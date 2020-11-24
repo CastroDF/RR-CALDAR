@@ -31,12 +31,17 @@ app.get('/boiler-types/delete/:id', (req, res) => {
     } 
 }); 
 
-app.get('/boiler-types/edit/:id/:clave/:valor', (req, res) => {
+//ex. http://localhost:3000/boiler-types/edit/1?stock=1
+app.get('/boiler-types/edit/:id', (req, res) => {
+    const query = req.query;
+    const params = req.params; 
+    const prop = Object.getOwnPropertyNames(req.query);
+    const value = Object.values(req.query);
     const found = boilerTypes.some(boilerType => boilerType.id === parseInt(req.params.id));
     if(found){
         var index = boilerTypes.map((boilerType) => boilerType.id ).indexOf(parseInt(req.params.id));
         if (index !== -1) {
-            boilerTypes[index][req.params.clave] = req.params.valor; 
+            boilerTypes[index][prop] = parseInt(value[0]); 
         }
     }else{
         res.status(400).json({msg: `No member with the id of ${req.params.id}`});
