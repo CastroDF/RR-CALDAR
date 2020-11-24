@@ -1,0 +1,15 @@
+Data Structure:
+- id (Row Number)
+- firstName (First Name)
+- lastName (Last Name)
+- email (Email Address)
+- typeIds (Array of Numbers from 1 to 3) <--- Where we can find which boilers he may fix.consultar
+- skillsId (Array of Numbers)
+- hour_rate (Money 0 - 50)
+- daily_capacity (Number between 0 - 8)
+
+Functions required:
+- getTechniciansAll
+- getTechnicianById
+- getTechniciansByAttribute
+- deleteTechnicianById
