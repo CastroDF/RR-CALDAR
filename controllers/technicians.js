@@ -8,13 +8,13 @@ app.get('/',(req, res) => {
     res.send('<h1>Hello world!!</h1>');
 });
 
-//this are only methods for get an answer
-//get all technicians
+//This are only methods for get an answer
+//Get all technicians
 app.get('/technicians/getAll', (req, res) => {
     res.json(technicians);
 });
 
-//get a single technicians by id
+//Get a single technicians by id
 app.get('/technicians/getById/:id', (req, res, next) =>{
     const found = technicians.some(technical => technical.id === parseInt(req.params.id));
     if(found){
@@ -27,15 +27,13 @@ app.get('/technicians/getById/:id', (req, res, next) =>{
 
 //Get a technician by attribute
 app.get('/technicians/getByAttribute/:type/:data', (req, res) =>{
-    //queryObject = url.parse(req.url).search;
-    console.log('el objeto', req.params.type);
     switch(req.params.type){
         case 'email':
             var found = technicians.some(technical => technical.email === req.params.data);
             if(found){
                 res.json(technicians.filter(technical => technical.email === req.params.data));
             } else {
-                res.status(400).json({msg: `Member not found ${req.params.email} sale por aca`});//an answerwhen the response fail
+                res.status(400).json({msg: `Member not found ${req.params.email} sale por aca`});
             }
             break;
         case 'first_name':
@@ -86,16 +84,19 @@ app.get('/technicians/getByAttribute/:type/:data', (req, res) =>{
                 res.status(400).json({msg: `Member not found ${req.params.data}`});
             }
             break;
+        default:
+            res.status(400).json({msg: `Attribute not found: ${req.params.type}`});
+            break;
     }
 });
-
+//Delete method
 //Delete a technician only by Id
 app.delete('/technicians/delete/:id', (req, res) =>{
     const found = technicians.some(member => member.id === parseInt(req.params.id));
     if(found){
         res.json({msg: 'Member deleted', technicians: technicians.filter(member => member.id !== parseInt(req.params.id))});//parsea porq devuelve un string 
     } else {
-        res.status(400).json({msg: `Member not found ${req.params.id}`});//an answerwhen the response fail
+        res.status(400).json({msg: `Member not found ${req.params.id}`});
     }
 });
 
