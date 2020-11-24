@@ -1,7 +1,7 @@
 const { request, response } = require('express');
 const express = require('express');
 const { dirname } = require('path');
-const customers = require('./data_customers.json');
+const customers = require('./data_customers/data_customers.json');
 const path = require('path');
 
 const app = express();
