@@ -2,9 +2,9 @@
   "name": "caldar",
   "version": "1.0.0",
   "description": "An app to manage operators designed for websites.",
-  "main": "index.js",
+  "main": "boilers.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node ./controllers/boilers.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,5 +20,8 @@
   "devDependencies": {
     "express": "^4.17.1",
     "lodash": "^4.17.20"
+  },
+  "dependencies": {
+    "cors": "^2.8.5"
   }
 }
