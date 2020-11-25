@@ -31,23 +31,41 @@ app.get('/boiler-types/delete/:id', (req, res) => {
     } 
 }); 
 
-//ex. http://localhost:3000/boiler-types/edit/1?stock=1
-app.get('/boiler-types/edit/:id', (req, res) => {
-    const query = req.query;
-    const params = req.params; 
-    const prop = Object.getOwnPropertyNames(req.query);
-    const value = Object.values(req.query);
-    const found = boilerTypes.some(boilerType => boilerType.id === parseInt(req.params.id));
+
+app.get("/getBoilerTypesSkill/:skillsId", (req, res) => {
+    const found = boilerTypes.some(boilerTypes => {boilerTypes.skillsId.includes(parseInt(req.params.skillsId))});
+    console.log(found);
     if(found){
-        var index = boilerTypes.map((boilerType) => boilerType.id ).indexOf(parseInt(req.params.id));
-        if (index !== -1) {
-            boilerTypes[index][prop] = parseInt(value[0]); 
-        }
+        res.json(boilerTypes.filter(boilerTypes.skillid.some(skillid => skillid === parseInt(req.params.skillsId)) === parseInt(req.params.skillsId)));
+        res.json(req.params.skillsId);
+    }else{
+        res.status(400).json({msg: `No member with the id of ${req.params.skillsId}`});
+    } 
+});
+
+// getBoilerTypesByDescription
+app.get("/getBoilerTypesDescription/:description", (req, res) => {
+    const found = boilerTypes.some(boilerType => boilerType.description === req.params.description);
+    console.log(found);
+
+    if(found){
+        res.json(boilerTypes.filter(boilerType => boilerType.description === (req.params.description).toString));
+        res.json(req.params.description);
+    }else{
+        res.status(400).json({msg: `No member with the id of ${req.params.description}`});
+    } 
+});
+
+// getBoilerTypesByStock
+app.get("/getBoilerTypesStock/:stock", (req, res) => {
+    const found = boilerTypes.some(boilerType => boilerType.stock === parseInt(req.params.stock));
+    if(found){
+        res.json(boilerTypes.filter(boilerType => boilerType.stock === parseInt(req.params.stock)));
+        res.json(req.params.stock);
     }else{
         res.status(400).json({msg: `No member with the id of ${req.params.id}`});
     } 
-}); 
-
+});
 
 
 app.listen(port, () => {
