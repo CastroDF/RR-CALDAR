@@ -28,25 +28,33 @@ router.get('/delete/:id', (req, res) => {
 
 
 router.get("/getBoilerTypesSkill/:skillsId", (req, res) => {
-    const found = boilerTypes.some(boilerType => boilerType.skillsId === parseInt(req.params.skillsId));
-    if(found){
-        res.json(boilerTypes.filter(boilerTypes.skillid.some(skillid => skillid === parseInt(req.params.skillsId)) === parseInt(req.params.skillsId)));
-        res.json(req.params.skillsId);
-    }else{
-        res.status(400).json({msg: `No member with the id of ${req.params.skillsId}`});
-    } 
+    const skillsIdNumber = parseInt(req.params.skillsId);
+    const found = boilerTypes.some(boilerTypes => {
+        boilerTypes.skillsId.includes(skillsIdNumber)
+    });
+
+    if (found) {
+        res.json(boilerTypes.filter(boilerTypes => {
+            boilerTypes.skillsId.includes(skillsIdNumber)
+        }))
+    } else {
+        res.status(400).json({ msg: `No boiler type with the skill id of ${req.params.skillsId}` })
+    }
 });
 
 
 router.get("/getBoilerTypesDescription/:description", (req, res) => {
-    const found = boilerTypes.filter(boilerType => boilerType.description === req.params.description);
-    console.log(found);
-    if(found){
-        res.json(boilerTypes.filter(boilerType => boilerType.description === req.params.description));
-        res.json(req.params.description);
-    }else{
-        res.status(400).json({msg: `No member with the id of ${req.params.description}`});
-    } 
+    const found = boilerTypes.some(boilerTypes => {
+        boilerTypes.description === String(req.params.description)
+    });
+
+    if (found) {
+        res.json(boilerTypes.filter(boilerTypes => {
+            boilerTypes.description === String(req.params.description)
+        }))
+    } else {
+        res.status(400).json({ msg: `No boiler type with the description of ${req.params.description}` })
+    }
 });
 
 
