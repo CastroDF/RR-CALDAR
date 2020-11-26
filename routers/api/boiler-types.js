@@ -47,14 +47,15 @@ router.get("/getBoilerTypesSkill/:skillsId", (req, res) => {
 
 
 router.get("/getBoilerTypesDescription/:description", (req, res) => {
-    const found = boilerTypes.some(boilerTypes => {
-        boilerTypes.description === String(req.params.description)
-    });
+    const found = boilerTypes.some(boilerTypes => boilerTypes.description.includes(req.params.description)
+    );
     console.log(found);
     if (found) {
-        res.json(boilerTypes.filter(boilerTypes => {
-            boilerTypes.description === String(req.params.description)
-        }))
+        res.json(boilerTypes.some(boilerTypes => {
+            boilerTypes.description.includes(req.params.description)
+                .status(200)
+                .json({msj: `Member with id: ${req.params.id} was deleted`});
+        }));
     } else {
         res.status(400).json({ msg: `No boiler type with the description of ${req.params.description}` })
     }
