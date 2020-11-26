@@ -47,8 +47,7 @@ router.get("/getBoilerTypesSkill/:skillsId", (req, res) => {
 
 
 router.get("/getBoilerTypesDescription/:description", (req, res) => {
-    const found = boilerTypes.some(boilerTypes => boilerTypes.description.includes(req.params.description)
-    );
+    const found = boilerTypes.some(boilerTypes => boilerTypes.description.includes(req.params.description));
     console.log(found);
     if (found) {
         res.json(boilerTypes.some(boilerTypes => {
