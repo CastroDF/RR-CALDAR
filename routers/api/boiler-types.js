@@ -21,7 +21,7 @@ router.get('/delete/:id', (req, res) => {
         if (index !== -1) {
             boilerTypes.splice(index, 1);
             res
-                .status(400)
+                .status(200)
                 .json({msj: `Member with id: ${req.params.id} was deleted`});
         }
     }else{
