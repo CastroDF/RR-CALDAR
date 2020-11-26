@@ -2,7 +2,7 @@ var express = require('express');
 const boilerTypes = require('../../data/boiler-types.js');
 const router = express.Router();
 
-router.get('/', (req, res) =>  res.json(boilerTypes)); 
+router.get('/', (req, res) =>  res.json(boilerTypes));
 
 router.get('/:id', (req, res) => {
     const found = boilerTypes.some(boilerType => boilerType.id === parseInt(req.params.id));
@@ -11,8 +11,8 @@ router.get('/:id', (req, res) => {
         res.json(req.params.id);
     }else{
         res.status(400).json({msg: `No member with the id of ${req.params.id}`});
-    } 
-}); 
+    }
+});
 
 router.get('/delete/:id', (req, res) => {
     const found = boilerTypes.some(boilerType => boilerType.id === parseInt(req.params.id));
@@ -23,8 +23,8 @@ router.get('/delete/:id', (req, res) => {
         }
     }else{
         res.status(400).json({msg: `No member with the id of ${req.params.id}`});
-    } 
-}); 
+    }
+});
 
 
 router.get("/getBoilerTypesSkill/:skillsId", (req, res) => {
@@ -65,7 +65,7 @@ router.get("/getBoilerTypesStock/:stock", (req, res) => {
         res.json(req.params.stock);
     }else{
         res.status(400).json({msg: `No member with the id of ${req.params.id}`});
-    } 
+    }
 });
 
 module.exports = router;
