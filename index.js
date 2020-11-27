@@ -3,7 +3,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 
 // Controllers
-const BoilersRoutes = require('../routers/api/boiler-types.js');
+const BoilersRoutes = require('../controllers/boiler-types-controllers.js');
 
 // Constants
 const PORT = 4000;
