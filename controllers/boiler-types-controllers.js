@@ -48,12 +48,12 @@ router.get("/getBoilerTypesSkill/:skillsId", (req, res) => {
   const found = boilerTypes.some((boilerTypes) =>
     boilerTypes.skillsId.includes(skillsIdNumber)
   );
-  console.log(found);
+
   if (found) {
     res.json(
-      boilerTypes.filter((boilerTypes) => {
-        boilerTypes.skillsId.includes(skillsIdNumber);
-      })
+      boilerTypes.filter((boilerTypes) =>
+        boilerTypes.skillsId.includes(skillsIdNumber)
+      )
     );
   } else {
     res.status(400).json({
@@ -75,7 +75,9 @@ router.get("/getBoilerTypesStock/:stock", (req, res) => {
     );
     res.json(req.params.stock);
   } else {
-    res.status(400).json({ msg: `No member with the id of ${req.params.id}` });
+    res
+      .status(400)
+      .json({ msg: `No members with that stock: ${req.params.stock}` });
   }
 });
 
