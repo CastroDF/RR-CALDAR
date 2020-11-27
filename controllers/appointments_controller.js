@@ -8,7 +8,7 @@ router.use(cors());
 const port = 3000;
 const appointments = require('../data/appointments.js');
 
-router.get('/appointments', (req, res) =>  res.json(appointments)); 
+router.get('/appointments', (req, res) =>  res.json(appointments));
 
 router.get('/appointments/:id', (req, res) => {
     const found = appointments.some(appointment => appointment.id === parseInt(req.params.id));
@@ -37,7 +37,7 @@ router.get('/appointments/edit/:id/:clave/:valor', (req, res) => {
     if(found){
         var index = appointments.map((appointment) => appointment.id ).indexOf(parseInt(req.params.id));
         if (index !== -1) {
-            appointments[index][req.params.clave] = req.params.valor; 
+            appointments[index][req.params.clave] = req.params.valor;
         }
     }else{
         res.status(400).json({msg: `No member with the id of ${req.params.id}`});
