@@ -3,7 +3,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 
 // Controllers
-const PlayersRoutes = require("./controllers/players-controller");
+const  boilerTypesController = require('../controllers/boiler-types-controllers.js');
 
 // Constants
 const PORT = 4000;
@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 // Support parsing of application/x-www-form-urlencoded post data
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(PlayersRoutes);
+app.use('/boiler-types', boilerTypesController);
 
 app.listen({ port: PORT }, () => {
   console.log(`Server running on http://localhost:${PORT}`);
