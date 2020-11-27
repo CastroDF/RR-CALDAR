@@ -43,18 +43,28 @@ router.get('/delete/:id', (req, res) => {
 });
 
 // getBoylerTypesBySkillId
+<<<<<<< HEAD:controllers/boiler-types-controller.js
 router.get('/getBoilerTypesSkill/:skillsId', (req, res) => {
+=======
+router.get("/getBoilerTypesSkill/:skillsId", (req, res) => {
+  console.log( req.params.skillsId)
+>>>>>>> f591649... Last commit:controllers/boiler-types-controllers.js
   const skillsIdNumber = parseInt(req.params.skillsId);
+  console.log(typeof skillsIdNumber)
   const found = boilerTypes.some((boilerTypes) =>
     boilerTypes.skillsId.includes(skillsIdNumber)
   );
 
   if (found) {
     res.json(
+<<<<<<< HEAD
       boilerTypes.filter((boilerTypes) =>
         boilerTypes.skillsId.includes(skillsIdNumber)
       )
     );
+=======
+      boilerTypes.filter((boilerTypes) => boilerTypes.skillsId.includes(skillsIdNumber)))
+>>>>>>> 763d372... Changes in data and routes
   } else {
     res.status(400).json({
       msg: `No boiler type with the skill id of ${req.params.skillsId}`

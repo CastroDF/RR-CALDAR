@@ -27,9 +27,23 @@ router.get("/:id", (req, res) =>{
 });
 
 //Get a technician by attribute
-router.get('/technicians/getByAttribute/:type/:data', (req, res) =>{
-    res.send('<h1>Hello world!!</h1>');
-    });
+router.get("/technicians/getByAttribute", (req, res) =>{
+    //const found = technicians.some(
+        //technical => technical.id === req.params.skillsId.toString;
+        console.log(technical.skillsId)
+        res.send('<h1>Hello world!!</h1>');
+    // if(found){
+    //     res.json(
+    //         technicians.filter(
+    //             technical => technical.skillsId === req.params.skillsId.toString
+    //         )
+    //     );
+    // } else {
+    //     res
+    //     .status(400)
+    //     .json({msg: `Member not found ${req.params.id} `});
+    // }
+});
 //Delete a technician only by Id
 router.delete('/technicians/delete/:id', (req, res) =>{
     const found = technicians.some(member => member.id === parseInt(req.params.id));
