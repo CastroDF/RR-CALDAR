@@ -57,14 +57,10 @@ router.get("/getBoilerTypesSkill/:skillsId", (req, res) => {
 
   if (found) {
     res.json(
-<<<<<<< HEAD
       boilerTypes.filter((boilerTypes) =>
         boilerTypes.skillsId.includes(skillsIdNumber)
       )
     );
-=======
-      boilerTypes.filter((boilerTypes) => boilerTypes.skillsId.includes(skillsIdNumber)))
->>>>>>> 763d372... Changes in data and routes
   } else {
     res.status(400).json({
       msg: `No boiler type with the skill id of ${req.params.skillsId}`
