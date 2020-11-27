@@ -1,17 +1,24 @@
-const express = require('express');
+const express = require("express");
+const technicians = require("../data/technicians-data.js");
 const router = express.Router();
-const technicians = require('../data/technicians-data');
+
 
 //Get all technicians
-router.get('/technicians', (req, res) => {
+router.get("/", (req, res) => {
     res.json(technicians);
 });
 
 //Get a single technicians by id
-router.get('/technicians/:id', (req, res) =>{
-    const found = technicians.some(technical => technical.id === parseInt(req.params.id));
+router.get("/:id", (req, res) =>{
+    const found = technicians.some(
+        technical => technical.id === parseInt(req.params.id)
+    );
     if(found){
-        res.json(technicians.filter(technical => technical.id === parseInt(req.params.id)));
+        res.json(
+            technicians.filter(
+                technical => technical.id === parseInt(req.params.id)
+            )
+        );
     } else {
         res
         .status(400)
