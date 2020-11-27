@@ -1,4 +1,4 @@
-const technicians = [
+module.exports = [
     {"id":1,"first_name":"Georgena","last_name":"Van der Baaren","email":"gvanderbaaren0@netscape.com","typeIds":2,"skillsId":"9367568770","hour_rate":"$23.19","daily_capacity":5},
     {"id":2,"first_name":"Jorie","last_name":"Margetson","email":"jmargetson1@icq.com","typeIds":2,"skillsId":"2992192732","hour_rate":"$12.61","daily_capacity":5},
     {"id":3,"first_name":"Ellie","last_name":"Grane","email":"egrane2@ed.gov","typeIds":2,"skillsId":"4200782308","hour_rate":"$31.20","daily_capacity":4},
@@ -20,4 +20,3 @@ const technicians = [
     {"id":19,"first_name":"Rupert","last_name":"MacAndrew","email":"rmacandrewi@amazon.com","typeIds":3,"skillsId":"5984766000","hour_rate":"$8.81","daily_capacity":4},
     {"id":20,"first_name":"Marnia","last_name":"Gaggen","email":"mgaggenj@spiegel.de","typeIds":1,"skillsId":"4282521325","hour_rate":"$22.37","daily_capacity":5}
 ]
-module.exports = technicians;
