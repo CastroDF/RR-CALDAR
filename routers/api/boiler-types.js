@@ -32,10 +32,8 @@ router.get('/delete/:id', (req, res) => {
 
 router.get("/getBoilerTypesSkill/:skillsId", (req, res) => {
     const skillsIdNumber = parseInt(req.params.skillsId);
-    const found = boilerTypes.some(boilerTypes => {
-        boilerTypes.skillsId.includes(skillsIdNumber)
-    });
-
+    const found = boilerTypes.some(boilerTypes => boilerTypes.skillsId.includes(skillsIdNumber));
+    console.log(found);
     if (found) {
         res.json(boilerTypes.filter(boilerTypes => {
             boilerTypes.skillsId.includes(skillsIdNumber)
@@ -48,7 +46,6 @@ router.get("/getBoilerTypesSkill/:skillsId", (req, res) => {
 
 router.get("/getBoilerTypesDescription/:description", (req, res) => {
     const found = boilerTypes.some(boilerTypes => boilerTypes.description.includes(req.params.description));
-    console.log(found);
     if (found) {
         res.json(boilerTypes.some(boilerTypes => {
             boilerTypes.description.includes(req.params.description)
