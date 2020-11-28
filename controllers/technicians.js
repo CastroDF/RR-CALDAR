@@ -27,12 +27,65 @@ router.get("/:id", (req, res) =>{
 });
 
 //Get a technician by attribute
+//Get by First name
+router.get("/getByAttributefirstName/:first_name", (req, res) => {
+  const found = technicians.some(
+    technical => technical.first_name === req.params.first_name
+);
+if(found){
+    res.json(
+        technicians.filter(
+            technical => technical.first_name === req.params.first_name
+        )
+    );
+} else {
+    res
+    .status(400)
+    .json({msg: `Member not found ${req.params.first_name} `});
+}
+});
+
+//Get by last name
+router.get("/getByAttributelastName/:last_name", (req, res) => {
+  const found = technicians.some(
+    technical => technical.last_name === req.params.last_name
+);
+if(found){
+    res.json(
+        technicians.filter(
+            technical => technical.last_name === req.params.last_name
+        )
+    );
+} else {
+    res
+    .status(400)
+    .json({msg: `Member not found ${req.params.last_name} `});
+}
+});
+
+//Get by email
+router.get("/getByAttributeEmail/:email", (req, res) => {
+  const found = technicians.some(
+    technical => technical.email === req.params.email
+);
+if(found){
+    res.json(
+        technicians.filter(
+            technical => technical.email === req.params.email
+        )
+    );
+} else {
+    res
+    .status(400)
+    .json({msg: `Member not found ${req.params.email} `});
+}
+});
+//Get by skillId
 router.get("/getByAttribute/:skillsId", (req, res) => {
     const skillsIdNumber = parseInt(req.params.skillsId);
     const found = technicians.some((technicians) =>
       technicians.skillsId.includes(skillsIdNumber)
     );
-    console.log(found);
     if (found) {
       res.json(
         technicians.filter((technicians) => technicians.skillsId.includes(skillsIdNumber))
@@ -43,6 +96,16 @@ router.get("/getByAttribute/:skillsId", (req, res) => {
       });
     }
   });
+
+
+
+
+
+
+
+
+
+
 //Delete a technician only by Id
 router.delete('/technicians/delete/:id', (req, res) =>{
     const found = technicians.some(member => member.id === parseInt(req.params.id));
