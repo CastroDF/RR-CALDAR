@@ -80,8 +80,25 @@ if(found){
     .json({msg: `Member not found ${req.params.email} `});
 }
 });
+//Get by typeIds
+router.get("/getByAttributeTypeIds/:typeIds", (req, res) => {
+  const typeIdsNumber = parseInt(req.params.typeIds);
+  const found = technicians.some((technicians) =>
+    technicians.typeIds.includes(typeIdsNumber)
+  );
+  if (found) {
+    res.json(
+      technicians.filter((technicians) => technicians.typeIds.includes(typeIdsNumber))
+    );
+  } else {
+    res.status(400).json({
+      msg: `No boiler type with the skill id of ${req.params.typeIds}`,
+    });
+  }
+});
+
 //Get by skillId
-router.get("/getByAttribute/:skillsId", (req, res) => {
+router.get("/getByAttributeSkillId/:skillsId", (req, res) => {
     const skillsIdNumber = parseInt(req.params.skillsId);
     const found = technicians.some((technicians) =>
       technicians.skillsId.includes(skillsIdNumber)
@@ -97,7 +114,22 @@ router.get("/getByAttribute/:skillsId", (req, res) => {
     }
   });
 
-
+//Get by skillId
+router.get("/getByAttributeHourRate/:hour_rate", (req, res) => {
+  const hourRateNumber = parseInt(req.params.hour_rate);
+  const found = technicians.some((technicians) =>
+    technicians.hour_rate.includes(hourRateNumber)
+  );
+  if (found) {
+    res.json(
+      technicians.filter((technicians) => technicians.hour_rate.includes(hourRateNumber))
+    );
+  } else {
+    res.status(400).json({
+      msg: `No boiler type with the skill id of ${req.params.hour_rate}`,
+    });
+  }
+});
 
 
 
