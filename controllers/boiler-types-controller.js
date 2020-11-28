@@ -47,10 +47,12 @@ router.get('/delete/:id', (req, res) => {
 router.get('/getBoilerTypesSkill/:skillsId', (req, res) => {
 =======
 router.get("/getBoilerTypesSkill/:skillsId", (req, res) => {
+<<<<<<< HEAD:controllers/boiler-types-controller.js
   console.log( req.params.skillsId)
 >>>>>>> f591649... Last commit:controllers/boiler-types-controllers.js
+=======
+>>>>>>> b44a735... MEthod getbyattribute modificated. First name, last name, and skillsId added:controllers/boiler-types-controllers.js
   const skillsIdNumber = parseInt(req.params.skillsId);
-  console.log(typeof skillsIdNumber)
   const found = boilerTypes.some((boilerTypes) =>
     boilerTypes.skillsId.includes(skillsIdNumber)
   );

@@ -29,15 +29,13 @@ router.get("/:id", (req, res) =>{
 //Get a technician by attribute
 router.get("/getByAttribute/:skillsId", (req, res) => {
     const skillsIdNumber = parseInt(req.params.skillsId);
-    const found = boilerTypes.some((boilerTypes) =>
-      boilerTypes.skillsId.includes(skillsIdNumber)
+    const found = technicians.some((technicians) =>
+      technicians.skillsId.includes(skillsIdNumber)
     );
     console.log(found);
     if (found) {
       res.json(
-        boilerTypes.filter((boilerTypes) => {
-          boilerTypes.skillsId.includes(skillsIdNumber);
-        })
+        technicians.filter((technicians) => technicians.skillsId.includes(skillsIdNumber))
       );
     } else {
       res.status(400).json({
