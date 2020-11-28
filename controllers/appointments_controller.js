@@ -5,12 +5,11 @@ var app = express();
 
 router.use(cors());
 
-const port = 3000;
 const appointments = require('../data/appointments.js');
 
-router.get('/appointments', (req, res) =>  res.json(appointments));
+router.get('/', (req, res) =>  res.json(appointments));
 
-router.get('/appointments/:id', (req, res) => {
+router.get('/:id', (req, res) => {
     const found = appointments.some(appointment => appointment.id === parseInt(req.params.id));
     if(found){
         res.json(appointments.filter(appointment => appointment.id === parseInt(req.params.id)));
@@ -20,7 +19,7 @@ router.get('/appointments/:id', (req, res) => {
     }
 });
 
-router.get('/appointments/delete/:id', (req, res) => {
+router.get('/delete/:id', (req, res) => {
     const found = appointments.some(appointment => appointment.id === parseInt(req.params.id));
     if(found){
         var index = appointments.map((appointment) => appointment.id ).indexOf(parseInt(req.params.id));
@@ -33,7 +32,7 @@ router.get('/appointments/delete/:id', (req, res) => {
 });
 
 
-app.get("/getAppointmentsBySkillsId/:buildingId", (req, res) => {
+router.get("/getAppointmentsBySkillsId/:buildingId", (req, res) => {
     const buildingIdNum = parseInt(req.params.buildingId);
     const found = appointments.some(appointments => {
         appointments.buildingId.includes(buildingIdNum)
@@ -49,7 +48,7 @@ app.get("/getAppointmentsBySkillsId/:buildingId", (req, res) => {
 });
 
 
-app.get("/getAppointmentaByDescription/:boilerId", (req, res) => {
+router.get("/getAppointmentaByDescription/:boilerId", (req, res) => {
     const found = appointments.some(appointments => {
         appointments.boilerId === parseInt(req.params.boilerId)
     });
@@ -64,7 +63,7 @@ app.get("/getAppointmentaByDescription/:boilerId", (req, res) => {
 });
 
 
-app.get("/getAppointmentsByStock/:start_timestamp", (req, res) => {
+router.get("/getAppointmentsByStock/:start_timestamp", (req, res) => {
     const found = appointments.some(appointments => {
         appointments.start_timestamp === req.params.start_timestamp;
     });
@@ -79,7 +78,7 @@ app.get("/getAppointmentsByStock/:start_timestamp", (req, res) => {
 });
 
 
-app.get("/getAppointmentsByStock/:end_timestamp", (req, res) => {
+router.get("/getAppointmentsByStock/:end_timestamp", (req, res) => {
     const found = appointments.some(appointments => {
         appointments.end_timestamp === req.params.end_timestamp;
     });
