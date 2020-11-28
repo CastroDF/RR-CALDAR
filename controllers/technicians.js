@@ -114,7 +114,7 @@ router.get("/getByAttributeSkillId/:skillsId", (req, res) => {
     }
   });
 
-//Get by skillId
+//Get by hour rate
 router.get("/getByAttributeHourRate/:hour_rate", (req, res) => {
   const hourRateNumber = parseInt(req.params.hour_rate);
   const found = technicians.some((technicians) =>
@@ -131,12 +131,23 @@ router.get("/getByAttributeHourRate/:hour_rate", (req, res) => {
   }
 });
 
-
-
-
-
-
-
+//Get by daily capacity
+router.get("/getByAttributeDailyCapacity/:daily_capacity", (req, res) => {
+  const found = technicians.some(
+    technical => technical.daily_capacity === parseInt(req.params.daily_capacity)
+);
+if(found){
+    res.json(
+        technicians.filter(
+            technical => technical.daily_capacity === parseInt(req.params.daily_capacity)
+        )
+    );
+} else {
+    res
+    .status(400)
+    .json({msg: `Member not found ${req.params.daily_capacity} `});
+}
+});
 
 //Delete a technician only by Id
 router.delete('/technicians/delete/:id', (req, res) =>{
