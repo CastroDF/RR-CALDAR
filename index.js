@@ -16,23 +16,20 @@ const techniciansTypeController = require("./controllers/technicians.js");
 =======
 const express = require("express");
 const app = express();
-//const cors = require("cors");
+const cors = require("cors");
 const bodyParser = require("body-parser");
 >>>>>>> d4cc343... Changes in the proyect, to connect with mongodb cloud seervice
 const PORT = 4000;
 const db = require("./app/models")
 const router = require('./app/routes');
-// // Controllers
-// const boilerTypesController = require("./controllers/boiler-types-controllers.js");
-// const techniciansTypeController = require("./controllers/technicians.js");
 
-// App
 // Support parsing of application/json type post data
 app.use(bodyParser.json());
 
 // Support parsing of application/x-www-form-urlencoded post data
 app.use(bodyParser.urlencoded({ extended: true }));
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 // Controllers
@@ -47,6 +44,10 @@ app.use("/technicians", techniciansTypeController);
 // app.use(cors());
 
 
+=======
+// Support Cross-Origin Resource Sharing
+ app.use(cors());
+>>>>>>> f172c40... Deleted commets
 
 db.mongoose
   .connect(db.url, {
@@ -63,10 +64,13 @@ db.mongoose
 
 app.use(router);
 
+<<<<<<< HEAD
 // app.use("/boiler-types", boilerTypesController);
 // app.use("/technicians", techniciansTypeController);
 >>>>>>> d4cc343... Changes in the proyect, to connect with mongodb cloud seervice
 
+=======
+>>>>>>> f172c40... Deleted commets
 app.listen({ port: PORT }, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
