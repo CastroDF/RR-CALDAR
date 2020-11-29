@@ -32,18 +32,15 @@ router.get('/delete/:id', (req, res) => {
 });
 
 
-router.get("/getAppointmentsBySkillsId/:buildingId", (req, res) => {
-    const buildingIdNum = parseInt(req.params.buildingId);
-    const found = appointments.some(appointments => {
-        appointments.buildingId.includes(buildingIdNum)
-    });
-
-    if (found) {
-        res.json(appointments.filter(appointments => {
-            appointments.buildingId.includes(buildingIdNum)
-        }))
-    } else {
-        res.status(400).json({ msg: `No boiler type with the buildingId id of ${req.params.buildingId}` })
+router.get("/getAppointmentsBybuilding/:buildingId", (req, res) => {
+    const found = appointments.some(appointment => appointment.buildingId === parseInt(req.params.buildingId));
+    if(found){
+        var index = appointments.map((appointment) => appointment.buildingId ).indexOf(parseInt(req.params.buildingId));
+        if (index !== -1) {
+            appointments.splice(index, 1);
+        }
+    }else{
+        res.status(400).json({msg: `No member with the id of ${req.params.buildingId}`});
     }
 });
 
