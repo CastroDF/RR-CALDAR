@@ -1,11 +1,36 @@
 const express = require('express');
 const app = express();
+const bodyParser = require("body-parser");
+const port = 8080;
+const db = require("./app/models");
+const router =require("./app/routers");
+
 const path = require('path');
 const customers = require('./data_customers/data_customers.json');
+const { truncate } = require('fs');
 
+app.use(bodyParser.json());
 
-app.listen(8080, () => {
-    console.log('Server:8080 OK')
+app.use(bodyParser.urlencoded({extended: true}));
+
+db.mongoose
+    .connect(db.url, {
+        useNewUrlParser: true,
+        useUnifiedTopology: truncate
+    })
+    .then(() => {
+        console.log("Connected to the database!");
+    })
+    .catch(err => {
+        console.log("Cannot connect to the database!", err);
+    });
+
+app.use(express.static('public'));
+
+app.use(router);
+
+app.listen(port, () => {
+    console.log('Server:${port} OK')
 });
 
 
