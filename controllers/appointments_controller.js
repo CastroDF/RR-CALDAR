@@ -1,7 +1,7 @@
 var express = require('express');
 var cors = require('cors');
 const router = express.Router();
-var app = express();
+
 
 router.use(cors());
 
@@ -63,7 +63,7 @@ router.get("/getAppointmentaByDescription/:boilerId", (req, res) => {
 });
 
 
-router.get("/getAppointmentsByStock/:start_timestamp", (req, res) => {
+router.get("/getAppointmentsStart/:start_timestamp", (req, res) => {
     const found = appointments.some(appointments => {
         appointments.start_timestamp === req.params.start_timestamp;
     });
@@ -78,7 +78,7 @@ router.get("/getAppointmentsByStock/:start_timestamp", (req, res) => {
 });
 
 
-router.get("/getAppointmentsByStock/:end_timestamp", (req, res) => {
+router.get("/getAppointmentsEnd/:end_timestamp", (req, res) => {
     const found = appointments.some(appointments => {
         appointments.end_timestamp === req.params.end_timestamp;
     });
