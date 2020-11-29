@@ -57,6 +57,24 @@ exports.findOne = (req, res) =>{
         });
 };
 
+exports.findOne = (req, res) =>{
+    BoilerTypes.findOne({id: req.params.value})
+        .then(data =>{
+            if(!data){
+                return res.status(404).send({
+                    message: `Boiler types with id ${req.params.value} was not found`
+                })
+            }
+            res.send(data)
+        })
+        .catch(err =>{
+            res.status(500).send({
+                message:
+                    err.message || "Some error ocurred while retrieving boiler types"
+            });
+        });
+};
+
 exports.update = (req, res) => {
     if(!req.body){
         return res.status(400).send({
