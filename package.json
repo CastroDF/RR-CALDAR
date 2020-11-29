@@ -4,11 +4,7 @@
   "description": "## What is it about?",
   "main": "index.js",
   "scripts": {
-<<<<<<< HEAD
     "start": "nodemon ./index.js",
-=======
-    "start": "node ./controllers/appointments.js",
->>>>>>> Appointment - data and functions
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
