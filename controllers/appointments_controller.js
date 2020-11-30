@@ -20,6 +20,7 @@ router.get('/delete/:id', (req, res) => {
         var index = appointments.map((appointment) => appointment.id ).indexOf(parseInt(req.params.id));
         if (index !== -1) {
             appointments.splice(index, 1);
+            res.status(500).json({msg: `The appointments with id ${req.params.id} was deleted`});
         }
     }else{
         res.status(400).json({msg: `No member with the id of ${req.params.id}`});
@@ -29,22 +30,20 @@ router.get('/delete/:id', (req, res) => {
 router.get("/getAppointmentsByBuilding/:buildingId", (req, res) => {
     const found = appointments.some(appointment => appointment.buildingId === parseInt(req.params.buildingId));
     if(found){
-        var index = appointments.map((appointment) => appointment.buildingId ).indexOf(parseInt(req.params.buildingId));
-        if (index !== -1) {
-            appointments.splice(index, 1);
-        }
+        res.json(appointments.filter(appointment => appointment.buildingId === parseInt(req.params.buildingId)));
+        res.json(req.params.id);
     }else{
-        res.status(400).json({msg: `No member with the id of ${req.params.buildingId}`});
+        res.status(400).json({msg: `No buildingId with the id of ${req.params.buildingId}`});
     }
 });
 
 router.get("/getAppointmentaByBoiler/:boilerId", (req, res) => {
-    const found = appointments.some(appointments => appointments.boilerId === parseInt(req.params.boilerId));
-
-    if (found) {
-        res.json(appointments.filter(appointments => appointments.boilerId === parseInt(req.params.boilerId)))
-    } else {
-        res.status(400).json({ msg: `No boiler type with the boilerId of ${req.params.boilerId}` })
+    const found = appointments.some(appointment => appointment.boilerId === parseInt(req.params.boilerId));
+    if(found){
+        res.json(appointments.filter(appointment => appointment.boilerId === parseInt(req.params.boilerId)));
+        res.json(req.params.id);
+    }else{
+        res.status(400).json({msg: `No boilerId with the id of ${req.params.boilerId}`});
     }
 });
 
@@ -62,10 +61,10 @@ router.get("/getAppointmentsEnd/:end_timestamp", (req, res) => {
     const found = appointments.some(appointments => appointments.end_timestamp === req.params.end_timestamp);
 
     if (found) {
-        res.json(appointments.filter(appointments => appointments.start_timestamp === req.params.start_timestamp));
+        res.json(appointments.filter(appointments => appointments.end_timestamp === req.params.end_timestamp));
     } else {
-        res.status(400).json({ msg: `No boiler type with the stock of ${req.params.end_timestamp}` })
+        res.status(400).json({ msg: `No boiler type with the end_timestamp of ${req.params.end_timestamp}` })
     }
 });
 
-
+module.exports = router;
