@@ -3,7 +3,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 
 // Controllers
-const AppointmentsController = require("./controllers/appointments-controller");
+const AppointmentsController = require("./controllers/appointments_controller");
 
 // Constants
 const PORT = 4000;
@@ -23,5 +23,5 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/appointments', AppointmentsController);
 
 app.listen({ port: PORT }, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on http://localhost: ${PORT}`);
 });

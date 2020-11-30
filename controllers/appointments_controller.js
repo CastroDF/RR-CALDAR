@@ -3,8 +3,6 @@ var cors = require('cors');
 const router = express.Router();
 const appointments = require('../data/appointments.js');
 
-router.use(cors());
-
 router.get('/', (req, res) =>  res.json(appointments));
 
 router.get('/:id', (req, res) => {
@@ -71,6 +69,4 @@ router.get("/getAppointmentsEnd/:end_timestamp", (req, res) => {
     }
 });
 
-router.listen(port, () => {
-    console.log(`Radium app listening at http://localhost: ${port} `);
-})
+
