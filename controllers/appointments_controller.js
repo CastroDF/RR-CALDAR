@@ -1,11 +1,9 @@
 var express = require('express');
 var cors = require('cors');
 const router = express.Router();
-
+const appointments = require('../data/appointments.js');
 
 router.use(cors());
-
-const appointments = require('../data/appointments.js');
 
 router.get('/', (req, res) =>  res.json(appointments));
 
@@ -31,8 +29,7 @@ router.get('/delete/:id', (req, res) => {
     }
 });
 
-
-router.get("/getAppointmentsBybuilding/:buildingId", (req, res) => {
+router.get("/getAppointmentsByBuilding/:buildingId", (req, res) => {
     const found = appointments.some(appointment => appointment.buildingId === parseInt(req.params.buildingId));
     if(found){
         var index = appointments.map((appointment) => appointment.buildingId ).indexOf(parseInt(req.params.buildingId));
@@ -44,8 +41,7 @@ router.get("/getAppointmentsBybuilding/:buildingId", (req, res) => {
     }
 });
 
-
-router.get("/getAppointmentaByDescription/:boilerId", (req, res) => {
+router.get("/getAppointmentaByBoiler/:boilerId", (req, res) => {
     const found = appointments.some(appointments => {
         appointments.boilerId === parseInt(req.params.boilerId)
     });
@@ -58,7 +54,6 @@ router.get("/getAppointmentaByDescription/:boilerId", (req, res) => {
         res.status(400).json({ msg: `No boiler type with the boilerId of ${req.params.boilerId}` })
     }
 });
-
 
 router.get("/getAppointmentsStart/:start_timestamp", (req, res) => {
     const found = appointments.some(appointments => {
@@ -74,7 +69,6 @@ router.get("/getAppointmentsStart/:start_timestamp", (req, res) => {
     }
 });
 
-
 router.get("/getAppointmentsEnd/:end_timestamp", (req, res) => {
     const found = appointments.some(appointments => {
         appointments.end_timestamp === req.params.end_timestamp;
@@ -88,9 +82,6 @@ router.get("/getAppointmentsEnd/:end_timestamp", (req, res) => {
         res.status(400).json({ msg: `No boiler type with the stock of ${req.params.end_timestamp}` })
     }
 });
-
-
-
 
 router.listen(port, () => {
     console.log(`Radium app listening at http://localhost: ${port} `);
