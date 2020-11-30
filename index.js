@@ -3,8 +3,8 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 
 // Controllers
-const boilerTypesController = require("../controllers/boiler-types-controller");
-const buildingController = require("../controllers/building-controller");
+const boilerTypesController = require("./controllers/boiler-types-controller");
+const buildingController = require("./controllers/building-controller");
 
 // Constants
 const PORT = 4000;
