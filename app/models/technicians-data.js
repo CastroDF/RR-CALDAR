@@ -12,7 +12,6 @@ module.exports = mongoose =>{
                 "hour_rate": String,
                 "daily_capacity": Number
             },
-            { timestamps: true }
         )
     )
     return Technicians

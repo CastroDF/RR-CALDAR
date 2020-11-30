@@ -1,17 +1,14 @@
 const db = require("../models");
 const Technicians = db.Technicians;
 
-
 //Get all technicians
 exports.findAll = (req, res) =>{
   Technicians.find({})
-    .then(data => {
-      res.send(data);
-    })
+    .then(data => res.send(data))
     .catch(err => {
       res.status(500).send({
         message:
-        err.message || "Some error ocurred while retreving buildings."
+          err.message || "Some error ocurred while retreving buildings."
       });
     });
 };
