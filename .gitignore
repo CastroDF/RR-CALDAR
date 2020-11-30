@@ -1,1 +1,6 @@
+<<<<<<< HEAD
 node_modules/
+=======
+# dependencies
+/node_modules
+>>>>>>> add user list
