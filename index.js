@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 
 // Controllers
 const boilerTypesController = require("../controllers/boiler-types-controller");
-const boilerTypesController = require("../controllers/building-controller");
+const buildingController = require("../controllers/building-controller");
 
 // Constants
 const PORT = 4000;
@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Controllers
 app.use("/boiler-types", boilerTypesController);
-app.use("/building", boilerTypesController);
+app.use("/building", buildingController);
 
 app.listen({ port: PORT }, () => {
   console.log(`Server running on http://localhost:${PORT}`);
