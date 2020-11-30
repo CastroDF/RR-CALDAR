@@ -42,42 +42,30 @@ router.get("/getAppointmentsByBuilding/:buildingId", (req, res) => {
 });
 
 router.get("/getAppointmentaByBoiler/:boilerId", (req, res) => {
-    const found = appointments.some(appointments => {
-        appointments.boilerId === parseInt(req.params.boilerId)
-    });
+    const found = appointments.some(appointments => appointments.boilerId === parseInt(req.params.boilerId));
 
     if (found) {
-        res.json(appointments.filter(appointments => {
-            appointments.boilerId === parseInt(req.params.boilerId)
-        }))
+        res.json(appointments.filter(appointments => appointments.boilerId === parseInt(req.params.boilerId)))
     } else {
         res.status(400).json({ msg: `No boiler type with the boilerId of ${req.params.boilerId}` })
     }
 });
 
 router.get("/getAppointmentsStart/:start_timestamp", (req, res) => {
-    const found = appointments.some(appointments => {
-        appointments.start_timestamp === req.params.start_timestamp;
-    });
+    const found = appointments.some(appointments => appointments.start_timestamp === req.params.start_timestamp);
 
     if (found) {
-        res.json(appointments.filter(appointments => {
-            appointments.start_timestamp === req.params.start_timestamp;
-        }));
+        res.json(appointments.filter(appointments => appointments.start_timestamp === req.params.start_timestamp));
     } else {
         res.status(400).json({ msg: `No boiler type with the start_timestamp of ${req.params.start_timestamp}` })
     }
 });
 
 router.get("/getAppointmentsEnd/:end_timestamp", (req, res) => {
-    const found = appointments.some(appointments => {
-        appointments.end_timestamp === req.params.end_timestamp;
-    });
+    const found = appointments.some(appointments => appointments.end_timestamp === req.params.end_timestamp);
 
     if (found) {
-        res.json(appointments.filter(appointments => {
-            appointments.end_timestamp === req.params.end_timestamp;
-        }));
+        res.json(appointments.filter(appointments => appointments.start_timestamp === req.params.start_timestamp));
     } else {
         res.status(400).json({ msg: `No boiler type with the stock of ${req.params.end_timestamp}` })
     }
