@@ -1,4 +1,11 @@
 const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+
+// Controllers
+const boilerTypesController = require("./controllers/boiler-types-controller");
+const buildingController = require("./controllers/building-controller");
+
 // App
 const app = express();
 // Constants
@@ -15,7 +22,6 @@ app.use(cors());
 
 // Support parsing of application/json type post data
 app.use(bodyParser.json());
-
 
 // Support parsing of application/x-www-form-urlencoded post data
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -34,10 +40,10 @@ db.mongoose
     process.exit;
   })
 
-
-
 app.use(router);
-//app.use('/boiler-types', boilerTypesController);
+// Controllers
+app.use("/building", buildingController);
+
 
 app.listen({ port: PORT }, () => {
   console.log(`Server running on http://localhost:${PORT}`);
