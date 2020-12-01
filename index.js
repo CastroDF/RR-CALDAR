@@ -11,6 +11,10 @@ const PORT = 4000;
 
 // App
 const app = express();
+const port = 3000;
+//const getUsuarios = require('./api/usuarios.js');
+const users = require('./data/person-data.js');
+//app.use(express.static('data'));
 
 // Support Cross-Origin Resource Sharing
 app.use(cors());
