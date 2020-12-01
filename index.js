@@ -68,6 +68,7 @@ app.use("/boiler-types", boilerTypesController);
 
 
 //mongoose
+db.mongoose
   .connect(db.url, {
     useNewUrlParser: true,
     useUnifiedTopology: true
