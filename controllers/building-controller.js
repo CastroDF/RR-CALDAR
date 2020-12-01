@@ -1,14 +1,14 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const buildings = require("../data/buildings");
+const buildings = require('../data/buildings');
 
-//getAllBuildings
-router.get("/", (req, res) => {
+// getAllBuildings
+router.get('/', (req, res) => {
   res.json(buildings);
 });
 
-//getBuildingById
-router.get("/:id", (req, res) => {
+// getBuildingById
+router.get('/:id', (req, res) => {
   const found = buildings.some(
     (buildings) => buildings.id === parseInt(req.params.id)
   );
@@ -21,8 +21,8 @@ router.get("/:id", (req, res) => {
   }
 });
 
-//getBuildingByAddress
-router.get("/address/:address", (req, res) => {
+// getBuildingByAddress
+router.get('/address/:address', (req, res) => {
   const found = buildings.some(
     (buildings) => buildings.address === req.params.address
   );
@@ -35,8 +35,8 @@ router.get("/address/:address", (req, res) => {
   }
 });
 
-//getBuildingByBoilersId
-router.get("/boilers/:boilersId", (req, res) => {
+// getBuildingByBoilersId
+router.get('/boilers/:boilersId', (req, res) => {
   const found = buildings.some(
     (buildings) => buildings.boilersId === parseInt(req.params.boilersId)
   );
@@ -53,8 +53,8 @@ router.get("/boilers/:boilersId", (req, res) => {
   }
 });
 
-//getBuildingByName
-router.get("/name/:fullName", (req, res) => {
+// getBuildingByName
+router.get('/name/:fullName', (req, res) => {
   const found = buildings.some(
     (buildings) => buildings.fullName === req.params.fullName
   );
@@ -71,8 +71,8 @@ router.get("/name/:fullName", (req, res) => {
   }
 });
 
-//getBuildingByPhone
-router.get("/phone/:phone", (req, res) => {
+// getBuildingByPhone
+router.get('/phone/:phone', (req, res) => {
   const found = buildings.some(
     (buildings) => buildings.phone === req.params.phone
   );
@@ -85,17 +85,17 @@ router.get("/phone/:phone", (req, res) => {
   }
 });
 
-//deleteBuildingByAddress
-router.delete("/delete/:id", (req, res) => {
+// deleteBuildingByAddress
+router.delete('/delete/:id', (req, res) => {
   const found = buildings.some(
     (buildings) => buildings.id === parseInt(req.params.id)
   );
   if (found) {
     res.json({
-      msg: "Building Deleted",
+      msg: 'Building Deleted',
       buildings: buildings.filter(
         (buildings) => buildings.id !== parseInt(req.params.id)
-      ),
+      )
     });
   } else {
     res
