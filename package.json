@@ -29,10 +29,11 @@
     "nodemon": "^2.0.6"
   },
   "dependencies": {
-    "body-parse": "^0.1.0",
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
-<<<<<<< HEAD
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongodb": "^3.6.3",
+    "mongoose": "^5.11.1"
   },
   "husky": {
     "hooks": {
@@ -44,15 +45,5 @@
       "eslint --fix",
       "git add"
     ]
-=======
-    "express": "^4.17.1",
-<<<<<<< HEAD
-    "lodash": "^4.17.20"
->>>>>>> aa0f92d... function getTechniciansAll, getTechnicianById added
-=======
-    "lodash": "^4.17.20",
-    "mongodb": "^3.6.3",
-    "mongoose": "^5.10.18"
->>>>>>> d4cc343... Changes in the proyect, to connect with mongodb cloud seervice
   }
 }

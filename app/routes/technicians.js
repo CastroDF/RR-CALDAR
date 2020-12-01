@@ -1,14 +1,14 @@
-const technicias = require("../controllers/technicians.js");
+const technicias = require('../controllers/technicians.js');
 
-var router = require("express").Router();
+const router = require('express').Router();
 
-//Retrive all technicians
-router.get("/", technicias.findAll);
+// Retrive all technicians
+router.get('/', technicias.findAll);
 
 // //Create a technician
-// router.post("/", technicias.create);
+router.post('/', technicias.create);
 
-//Retrive a single technicians with id
-router.get("/:id", technicias.findOne);
+// Retrive a single technicians with id
+router.get('/:id', technicias.findOne);
 
 module.exports = router;
