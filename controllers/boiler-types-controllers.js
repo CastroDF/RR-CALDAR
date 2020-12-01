@@ -1,5 +1,5 @@
 var express = require('express');
-const boilerTypes = require('../../data/boiler-types.js');
+const boilerTypes = require('../data/boiler-types.js');
 const router = express.Router();
 
 router.get('/', (req, res) =>  res.json(boilerTypes));
