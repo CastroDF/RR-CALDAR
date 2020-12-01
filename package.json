@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
+<<<<<<< HEAD
     "express": "^4.17.1"
   },
   "husky": {
@@ -42,5 +43,9 @@
       "eslint --fix",
       "git add"
     ]
+=======
+    "express": "^4.17.1",
+    "lodash": "^4.17.20"
+>>>>>>> aa0f92d... function getTechniciansAll, getTechnicianById added
   }
 }
