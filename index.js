@@ -21,13 +21,9 @@ app.use(cors());
 // Support parsing of application/json type post data
 app.use(bodyParser.json());
 
-// Support parsing of application/x-www-form-urlencoded post data
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Controllers
 app.use("/boiler-types", boilerTypesController);
 app.use("/building", boilerTypesController);
 
-app.listen({ port: PORT }, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
