@@ -1,12 +1,12 @@
-var express = require("express");
-const boilerTypes = require("../data/boiler-types.js");
+const express = require('express');
+const boilerTypes = require('../data/boiler-types.js');
 const router = express.Router();
 
 // getAllBoilerTypes
-router.get("/", (req, res) => res.json(boilerTypes));
+router.get('/', (req, res) => res.json(boilerTypes));
 
 // getBoilerTypeById
-router.get("/:id", (req, res) => {
+router.get('/:id', (req, res) => {
   const found = boilerTypes.some(
     (boilerType) => boilerType.id === parseInt(req.params.id)
   );
@@ -23,12 +23,12 @@ router.get("/:id", (req, res) => {
 });
 
 // deleteBoilerTypeById
-router.get("/delete/:id", (req, res) => {
+router.get('/delete/:id', (req, res) => {
   const found = boilerTypes.some(
     (boilerType) => boilerType.id === parseInt(req.params.id)
   );
   if (found) {
-    var index = boilerTypes
+    const index = boilerTypes
       .map((boilerType) => boilerType.id)
       .indexOf(parseInt(req.params.id));
     if (index !== -1) {
@@ -43,7 +43,7 @@ router.get("/delete/:id", (req, res) => {
 });
 
 // getBoylerTypesBySkillId
-router.get("/getBoilerTypesSkill/:skillsId", (req, res) => {
+router.get('/getBoilerTypesSkill/:skillsId', (req, res) => {
   const skillsIdNumber = parseInt(req.params.skillsId);
   const found = boilerTypes.some((boilerTypes) =>
     boilerTypes.skillsId.includes(skillsIdNumber)
@@ -57,13 +57,13 @@ router.get("/getBoilerTypesSkill/:skillsId", (req, res) => {
     );
   } else {
     res.status(400).json({
-      msg: `No boiler type with the skill id of ${req.params.skillsId}`,
+      msg: `No boiler type with the skill id of ${req.params.skillsId}`
     });
   }
 });
 
 // getBoilerTypesByStock
-router.get("/getBoilerTypesStock/:stock", (req, res) => {
+router.get('/getBoilerTypesStock/:stock', (req, res) => {
   const found = boilerTypes.some(
     (boilerType) => boilerType.stock === parseInt(req.params.stock)
   );
