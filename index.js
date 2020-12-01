@@ -25,7 +25,7 @@ app.use(bodyParser.json());
 // Support parsing of application/x-www-form-urlencoded post data
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/boiler-types', PlayersRoutes);
+app.use('/boiler-types', BoilersRoutes);
 
 app.listen({ port: PORT }, () => {
   console.log(`Server running on http://localhost:${PORT}`);
