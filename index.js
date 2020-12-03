@@ -9,8 +9,16 @@ const router = require("./app/routes");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
+// Support Cross-Origin Resource Sharing
+app.use(cors());
+
+// Support parsing of application/json type post data
+app.use(bodyParser.json());
+
+
 // Controllers
-const boilerTypesController = require('./controllers/boiler-types-controller');
+//const boilerTypesController = require('./controllers/boiler-types-controller');
+//const appointmentsController = require('./controllers/appointments-controller');
 const buildingController = require('./controllers/building-controller');
 
 //Connection Mongo
@@ -39,32 +47,21 @@ async function boilerTypesCrud(client){
   console.log(allBoilerTypes);
 }
 
+async function appointmentsCrud(client){
+  const databaseObject = await client.db("caldar");
+  const collectionObject = databaseObject.collection("appointments");
 
+  const allAppointments = await collectionObject.find({}).toArray();
+  console.log(allAppointments);
+}
 
-// Controllers
-//const  boilerTypesController = require('../controllers/boiler-types-controllers.js');
-
-// Constants
-const PORT = 4000;
-
-// App
-const app = express();
-const port = 3000;
-//const getUsuarios = require('./api/usuarios.js');
-const users = require('./data/person-data.js');
-//app.use(express.static('data'));
-
-// Support Cross-Origin Resource Sharing
-app.use(cors());
-
-// Support parsing of application/json type post data
-app.use(bodyParser.json());
 
 
 // Support parsing of application/x-www-form-urlencoded post data
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/boiler-types", boilerTypesController);
+app.use("/appointments", appointmentsController);
 
 
 //mongoose
