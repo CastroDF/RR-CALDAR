@@ -1,4 +1,4 @@
-const technicias = require('../controllers/technicians.js');
+const technicias = require('../controllers/technicians');
 
 const router = require('express').Router();
 
@@ -10,5 +10,9 @@ router.post('/', technicias.create);
 
 // Retrive a single technicians with id
 router.get('/:id', technicias.findOne);
+// Remove by Id
+router.put('/:id', technicias.update);
+// Remove by Id
+router.delete('/:id', technicias.deleteById);
 
 module.exports = router;
