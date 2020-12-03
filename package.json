@@ -1,17 +1,10 @@
 {
   "name": "rr-caldar",
   "version": "1.0.0",
-  "description": "## An app to manage operators designed for websites.",
   "main": "index.js",
   "scripts": {
     "start": "nodemon ./index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/CastroDF/RR-CALDAR.git"
-  },
-  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/CastroDF/RR-CALDAR/issues"
@@ -24,7 +17,5 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "mongodb": "^3.6.3",
     "mongoose": "^5.10.17"
   }
-}
