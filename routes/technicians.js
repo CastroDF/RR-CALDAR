@@ -1,4 +1,4 @@
-const technicias = require('../controllers/technicians');
+const technicias = require('../controllers/technicians.js');
 
 const router = require('express').Router();
 

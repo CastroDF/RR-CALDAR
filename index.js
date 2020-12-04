@@ -1,4 +1,3 @@
-require('dotenv').config();
 const express = require('express');
 const app = express();
 const cors = require('cors');
@@ -7,9 +6,8 @@ const PORT = 4000;
 const mongoose = require('mongoose');
 const router = require('./routes');
 const db = {};
+require('dotenv').config();
 
-const MONGO_ATLAS_USE = process.env.MONGO_ATLAS_USER || 'no definida';
-console.log('mi string de mongo atlas es:', MONGO_ATLAS_USE);
 // Support parsing of application/json type post data
 app.use(bodyParser.json());
 
@@ -19,8 +17,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Support Cross-Origin Resource Sharing
 app.use(cors());
 
+// Databese connection values
+const MONGO_DB_USER = process.env.MONGO_DB_USER;
+const MONGO_DB_PASSWORD = process.env.MONGO_DB_PASSWORD;
+const MONGO_DB_DATABASE = process.env.MONGO_DB_DATABASE;
+
+// Establish connection
 db.mongoose = mongoose;
-db.url = 'mongodb+srv://nico123:nico123@cluster0.wl5wc.mongodb.net/RR-CALDAR?retryWrites=true&w=majority';
+db.url = `mongodb+srv://${MONGO_DB_USER}:${MONGO_DB_PASSWORD}@cluster0.wl5wc.mongodb.net/${MONGO_DB_DATABASE}?retryWrites=true&w=majority`;
 db.Technicians = require('./models/technicians-data');
 db.mongoose
   .connect(db.url, {

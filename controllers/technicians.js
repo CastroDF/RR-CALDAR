@@ -1,5 +1,5 @@
-const db = require('../models/technicians-data');
-const Technicians = db.technicians;
+const mongoose = require('mongoose');
+const Technicians = require('../models/technicians-data.js')(mongoose);
 
 // Crate technicians
 exports.create = (req, res) => {
