@@ -1,12 +1,17 @@
 const express = require('express');
-const app = express();
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const PORT = 4000;
 const mongoose = require('mongoose');
 const router = require('./routes');
-const db = {};
+const cors = require('cors');
+const bodyParser = require('body-parser');
 require('dotenv').config();
+
+// Constants
+const PORT = 4000;
+
+// App
+const app = express();
+
+const db = {};
 
 // Support parsing of application/json type post data
 app.use(bodyParser.json());
