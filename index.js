@@ -4,8 +4,8 @@ const app = express();
 // Constants
 const PORT = 4000;
 //db
-const db = require("./app/models");
-const router = require("./app/routes");
+const db = require("./models");
+const router = require("./routes");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
@@ -17,8 +17,8 @@ app.use(bodyParser.json());
 
 
 // Controllers
-//const boilerTypesController = require('./controllers/boiler-types-controller');
-//const appointmentsController = require('./controllers/appointments-controller');
+const boilerTypesController = require('./controllers/boiler-types-controller');
+const appointmentsController = require('./controllers/appointments-controller');
 const buildingController = require('./controllers/building-controller');
 
 //Connection Mongo

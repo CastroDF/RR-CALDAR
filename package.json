@@ -30,8 +30,9 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
-
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongodb": "^3.6.3",
+    "mongoose": "^5.10.17"
 
   },
   "husky": {
@@ -44,10 +45,5 @@
       "eslint --fix",
       "git add"
     ]
-
-    "express": "^4.17.1",
-    "mongodb": "^3.6.3",
-    "mongoose": "^5.10.17"
-
   }
 }
