@@ -1,0 +1,23 @@
+{
+    "env": {
+        "commonjs": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": [
+        "standard"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 12
+    },
+    "rules": {
+        // We only want single quotes
+        "quotes": ["error", "single"],
+        // We want to force semicolons
+        "semi": ["error", "always"],
+        // We use 2 spaces to indent our code
+        "indent": ["error", 2],
+        // We want to avoid useless spaces
+        "no-multi-spaces": ["error"]
+    }
+}
