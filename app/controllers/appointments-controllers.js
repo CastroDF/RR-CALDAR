@@ -1,5 +1,5 @@
 const db = require("../models");
-const BoilerTypes = db.boilerTypes;
+const Appointments = db.appointments;
 
 exports.create = (req, res)  => {
     if(!req.body.boilerId || !req.body.buildingId || !req.body.start_timestamp || !req.body.end_timestamp){
@@ -14,7 +14,7 @@ exports.create = (req, res)  => {
         start_timestamp: req.body.start_timestamp,
         end_timestamp: req.body.end_timestamp
     });
-    newAppointmets
+    newAppointments
         .save(newAppointments)
         .then(data =>{
             res.send(data);
@@ -58,12 +58,30 @@ exports.findOne = (req, res) =>{
         });
 };
 
-exports.findOne = (req, res) =>{
-    Appointments.findOne({id: req.params.value})
+exports.findOneStart = (req, res) =>{
+    Appointments.find({"start_timestamp" : {"$gt" : new Date(req.params.value)}})
         .then(data =>{
             if(!data){
                 return res.status(404).send({
-                    message: `Appointments with id ${req.params.value} was not found`
+                    message: `Appointments with date start ${req.params.value} was not found`
+                })
+            }
+            res.send(data)
+        })
+        .catch(err =>{
+            res.status(500).send({
+                message:
+                    err.message || "Some error ocurred while retrieving appointments"
+            });
+        });
+};
+
+exports.findOneEnd = (req, res) =>{
+    Appointments.find({"end_timestamp" : {"$gt" : new Date(req.params.value)}})
+        .then(data =>{
+            if(!data){
+                return res.status(404).send({
+                    message: `Appointments with time end ${req.params.value} was not found`
                 })
             }
             res.send(data)
