@@ -9,20 +9,6 @@ const router = require("./app/routes");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
-// Controllers
-const boilerTypesController = require("../controllers/boiler-types-controller");
-const boilerTypesController = require("../controllers/building-controller");
-
-// Constants
-const PORT = 4000;
-
-// App
-const app = express();
-const port = 3000;
-//const getUsuarios = require('./api/usuarios.js');
-const users = require('./data/person-data.js');
-//app.use(express.static('data'));
-
 // Support Cross-Origin Resource Sharing
 app.use(cors());
 
@@ -30,12 +16,56 @@ app.use(cors());
 app.use(bodyParser.json());
 
 
+// Controllers
+//const boilerTypesController = require('./controllers/boiler-types-controller');
+//const appointmentsController = require('./controllers/appointments-controller');
+const buildingController = require('./controllers/building-controller');
+
+//Connection Mongo
+const {MongoClient} = require('mongodb');
+
+async function dbConnection(){
+    const url = "mongodb+srv://caldar:caldar1234@cluster0.ic0eo.mongodb.net/caldar?retryWrites=true&w=majority";
+    const client = new MongoClient(url, {useUnifiedTopology: true});
+    try{
+        await client.connect();
+        await boilerTypesCrud(client);
+    }catch(e){
+        console.error(e);
+    } finally{
+        await client.close();
+    }
+}
+
+dbConnection().catch(console.error);
+
+async function boilerTypesCrud(client){
+  const databaseObject = await client.db("caldar");
+  const collectionObject = databaseObject.collection("boiler-types");
+
+  const allBoilerTypes = await collectionObject.find({}).toArray();
+  console.log(allBoilerTypes);
+}
+
+async function appointmentsCrud(client){
+  const databaseObject = await client.db("caldar");
+  const collectionObject = databaseObject.collection("appointments");
+
+  const allAppointments = await collectionObject.find({}).toArray();
+  console.log(allAppointments);
+}
+
+
+
 // Support parsing of application/x-www-form-urlencoded post data
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Controllers
 app.use("/boiler-types", boilerTypesController);
+
 app.use("/building", boilerTypesController);
+
+app.use("/appointments", appointmentsController);
 
 
 //mongoose
