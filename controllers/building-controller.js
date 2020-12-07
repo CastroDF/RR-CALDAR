@@ -1,107 +1,166 @@
-const express = require('express');
-const router = express.Router();
-const buildings = require('../data/buildings');
+const mongoose = require('mongoose');
+const Buildings = require('../models/buildings-data')(mongoose);
+// BASICS
 
-// getAllBuildings
-router.get('/', (req, res) => {
-  res.json(buildings);
-});
-
-// getBuildingById
-router.get('/:id', (req, res) => {
-  const found = buildings.some(
-    (buildings) => buildings.id === parseInt(req.params.id)
-  );
-  if (found) {
-    res.json(
-      buildings.filter((buildings) => buildings.id === parseInt(req.params.id))
-    );
-  } else {
-    res.status(400).json({ msg: `Building ID '${req.params.id}', not found.` });
-  }
-});
-
-// getBuildingByAddress
-router.get('/address/:address', (req, res) => {
-  const found = buildings.some(
-    (buildings) => buildings.address === req.params.address
-  );
-  if (found) {
-    res.json(
-      buildings.filter((buildings) => buildings.address === req.params.address)
-    );
-  } else {
-    res.status(400).json({ msg: `Address ${req.params.address}, not found.` });
-  }
-});
-
-// getBuildingByBoilersId
-router.get('/boilers/:boilersId', (req, res) => {
-  const found = buildings.some(
-    (buildings) => buildings.boilersId === parseInt(req.params.boilersId)
-  );
-  if (found) {
-    res.json(
-      buildings.filter(
-        (buildings) => buildings.boilersId === parseInt(req.params.boilersId)
-      )
-    );
-  } else {
-    res
-      .status(400)
-      .json({ msg: `Boilers ID ${req.params.boilersId}, not found.` });
-  }
-});
-
-// getBuildingByName
-router.get('/name/:fullName', (req, res) => {
-  const found = buildings.some(
-    (buildings) => buildings.fullName === req.params.fullName
-  );
-  if (found) {
-    res.json(
-      buildings.filter(
-        (buildings) => buildings.fullName === req.params.fullName
-      )
-    );
-  } else {
-    res
-      .status(400)
-      .json({ msg: `Full Name ${req.params.fullName}, not found.` });
-  }
-});
-
-// getBuildingByPhone
-router.get('/phone/:phone', (req, res) => {
-  const found = buildings.some(
-    (buildings) => buildings.phone === req.params.phone
-  );
-  if (found) {
-    res.json(
-      buildings.filter((buildings) => buildings.phone === req.params.phone)
-    );
-  } else {
-    res.status(400).json({ msg: `Phone ${req.params.phone}, not found.` });
-  }
-});
-
-// deleteBuildingByAddress
-router.delete('/delete/:id', (req, res) => {
-  const found = buildings.some(
-    (buildings) => buildings.id === parseInt(req.params.id)
-  );
-  if (found) {
-    res.json({
-      msg: 'Building Deleted',
-      buildings: buildings.filter(
-        (buildings) => buildings.id !== parseInt(req.params.id)
-      )
+// Create Buildings
+exports.create = (req, res) => {
+  if (!req.body.id || !req.body.boilersId || !req.body.address || !req.body.fullName || !req.body.phone) {
+    return res.status(400).send({
+      message: 'Incomplete data'
     });
-  } else {
-    res
-      .status(400)
-      .json({ msg: `No building with the ID of ${req.params.id}` });
-  }
-});
+  };
+  const newBuilding = new Buildings({
+    id: req.body.id,
+    address: req.body.address,
+    boilersId: req.body.boilersId,
+    fullName: req.body.fullName,
+    phone: req.body.phone
+  });
+  newBuilding
+    .save(newBuilding)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+                        err.message || 'Error ocurred trying to create Building'
+      });
+    });
+};
+// getBuldingsAll
+exports.getBuildingsAll = (req, res) => {
+  Buildings.find({})
+    .then(data => res.send(data))
+    .catch(err => {
+      res.status(500).send({
+        message:
+                    err.message || 'Error ocurred trying to retrieve buildings.'
+      });
+    });
+};
+// updateBuilding
+exports.updateBuilding = (req, res) => {
+  if (!req.body) {
+    return res.status(400).send({
+      message: 'Must have at least 1 parameter to update a Building'
+    });
+  };
+  const id = req.params.id;
 
-module.exports = router;
+  Buildings.findOneAndUpdate({ id }, req.body, { useFindAndModify: false })
+    .then(data => {
+      if (!data) {
+        res.status(404).send({
+          message: `Can't update Building ID "${id}"`
+        });
+      } else {
+        res.send({
+          message: `Building ID "${id}" was updated successfully`
+        });
+      };
+    });
+};
+// deleteBuildingById
+exports.deleteById = (req, res) => {
+  Buildings.findOneAndRemove({ id: req.params.id }, { useFindAndModify: false })
+    .then(data => {
+      res.send({ message: `Building ID ${req.params.id} was removed succesfully` });
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+                        err.message || `Building ID ${req.params.id} can't be deleted`
+      });
+    });
+};
+
+// BYATTRIBUTES
+
+// getBuldingById
+exports.getBuildingById = (req, res) => {
+  Buildings.findOne({ id: req.params.id })
+    .then(data => {
+      if (!data) {
+        return res.status(404).send({
+          message: `Building ID ${req.params.id} was not found`
+        });
+      }
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+                    err.message || 'Some error ocurred while retrieving buildings'
+      });
+    });
+};
+
+exports.getBuildingByAddress = (req, res) => {
+  Buildings.find({ address: req.params.address })
+    .then(data => {
+      if (!data) {
+        return res.status(404).send({
+          message: `No Buildings with address: "${req.params.address}" were found`
+        });
+      };
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+                    err.message || 'Some error ocurred while retrieving buildings'
+      });
+    });
+};
+exports.getBuildingByBoilerId = (req, res) => {
+  Buildings.find({ boilersId: req.params.boilersId })
+    .then(data => {
+      if (!data) {
+        return res.status(404).send({
+          message: `No Buildings with boiler id: "${req.params.boilersId}" were found`
+        });
+      };
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+                    err.message || 'Some error ocurred while retrieving buildings'
+      });
+    });
+};
+exports.getBuildingByFullName = (req, res) => {
+  Buildings.find({ fullName: req.params.fullName })
+    .then(data => {
+      if (!data) {
+        return res.status(404).send({
+          message: `No Buildings with Name: "${req.params.fullName}" were found`
+        });
+      };
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+                    err.message || 'Some error ocurred while retrieving buildings'
+      });
+    });
+};
+exports.getBuildingByPhone = (req, res) => {
+  Buildings.find({ phone: req.params.phone })
+    .then(data => {
+      if (!data) {
+        return res.status(404).send({
+          message: `No Buildings with phone: "${req.params.phone}" were found`
+        });
+      };
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+                    err.message || 'Some error ocurred while retrieving buildings'
+      });
+    });
+};
