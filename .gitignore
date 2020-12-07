@@ -1,6 +1,5 @@
-<<<<<<< HEAD
 # dependencies
 /node_modules
-=======
-node_modules/
->>>>>>> corrections errors
+/.env
+/.eslintrc.json
+/Procfile

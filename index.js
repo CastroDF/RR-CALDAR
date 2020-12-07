@@ -1,8 +1,10 @@
+require('dorenv').config();
+
 const express = require("express");
 // App
 const app = express();
 // Constants
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 //db
 const db = require("./models");
 const router = require("./routes");
@@ -14,7 +16,6 @@ app.use(cors());
 
 // Support parsing of application/json type post data
 app.use(bodyParser.json());
-
 
 // Controllers
 const boilerTypesController = require('./controllers/boiler-types-controller');
