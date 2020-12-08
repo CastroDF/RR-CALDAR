@@ -17,6 +17,6 @@ router.get('/:type', customers.findOne);
 router.put('/:id', customers.update);
 
 // deleteCustomerById
-router.delete('/:id', customers.deleteById);
+router.deleteById('/delete/:id', customers.deleteById);
 
 module.exports = router;

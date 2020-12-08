@@ -98,7 +98,7 @@ exports.update = (req, res) => {
     });
 };
 
-exports.delete = (req, res) => {
+exports.deleteById = (req, res) => {
   const id = req.params.id_customer;
   Customers.findOneAndRemove({ id }, { useFindAndModify: false })
     .then(data =>
