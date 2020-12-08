@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 require('dotenv').config();
 
 // Constants
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 
 // App
 const app = express();
@@ -31,6 +31,8 @@ const MONGO_DB_DATABASE = process.env.MONGO_DB_DATABASE;
 db.mongoose = mongoose;
 db.url = `mongodb+srv://${MONGO_DB_USER}:${MONGO_DB_PASSWORD}@cluster0.wl5wc.mongodb.net/${MONGO_DB_DATABASE}?retryWrites=true&w=majority`;
 db.Technicians = require('./models/technicians-data');
+db.BoilerTypes = require('./models/boiler-types');
+db.Appointments = require('./models/appointments');
 db.mongoose
   .connect(db.url, {
     useNewUrlParser: true,
