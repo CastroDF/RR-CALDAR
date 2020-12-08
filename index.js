@@ -33,6 +33,8 @@ db.url = `mongodb+srv://${MONGO_DB_USER}:${MONGO_DB_PASSWORD}@cluster0.wl5wc.mon
 db.Technicians = require('./models/technicians');
 db.BoilerTypes = require('./models/boiler-types');
 db.Appointments = require('./models/appointments');
+db.Buildings = require('./models/buildings');
+db.Boilers = require('./models/boilers');
 db.mongoose
   .connect(db.url, {
     useNewUrlParser: true,
