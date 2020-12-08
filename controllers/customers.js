@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Customers = ('../models/customers.js')(mongoose);
+const Customers = require('../models/customers.js')(mongoose);
 
 exports.create = (req, res) => {
   if (!req.body.id_customer || !req.body.type || !req.body.email || !req.body.city) {
