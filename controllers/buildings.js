@@ -162,7 +162,7 @@ exports.updateBuilding = (req, res) => {
 exports.deleteById = (req, res) => {
   Buildings.findOneAndRemove({ id: req.params.id }, { useFindAndModify: false })
     .then(data => {
-      res.send({ message: `Building ID ${req.params.id} was removed succesfully` });
+      res.send({ message: `Building ID ${req.params.id} was removed successfully` });
     })
     .catch(err => {
       res.status(500).send({

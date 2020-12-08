@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Appointments = require('../models/Appointments.js')(mongoose);
+const Appointments = require('../models/appointments.js')(mongoose);
 
 // Create appointment
 exports.create = (req, res) => {

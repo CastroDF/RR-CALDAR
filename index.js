@@ -35,6 +35,7 @@ db.BoilerTypes = require('./models/boiler-types');
 db.Appointments = require('./models/appointments');
 db.Buildings = require('./models/buildings');
 db.Boilers = require('./models/boilers');
+db.Customers = require('./models/customers');
 db.mongoose
   .connect(db.url, {
     useNewUrlParser: true,
