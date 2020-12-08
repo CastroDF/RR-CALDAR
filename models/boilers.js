@@ -1,6 +1,6 @@
 module.exports = mongoose => {
-  const Boilersdf = mongoose.model(
-    'boilersdf',
+  const Boilers = mongoose.model(
+    'boilers',
     mongoose.Schema(
       {
         id: Number,
@@ -12,5 +12,5 @@ module.exports = mongoose => {
       { timestamps: true }
     )
   );
-  return Boilersdf;
+  return Boilers;
 };

@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
-const Buildings = require('../models/buildings-data')(mongoose);
-// BASICS
+const Buildings = require('../models/buildings')(mongoose);
 
-// Create Buildings
+// Create buildings
 exports.create = (req, res) => {
   if (!req.body.id || !req.body.boilersId || !req.body.address || !req.body.fullName || !req.body.phone) {
     return res.status(400).send({
@@ -28,7 +27,8 @@ exports.create = (req, res) => {
       });
     });
 };
-// getBuldingsAll
+
+// Get all buildings
 exports.getBuildingsAll = (req, res) => {
   Buildings.find({})
     .then(data => res.send(data))
@@ -39,7 +39,103 @@ exports.getBuildingsAll = (req, res) => {
       });
     });
 };
-// updateBuilding
+
+// Get building by id
+exports.getBuildingById = (req, res) => {
+  Buildings.findOne({ id: req.params.id })
+    .then(data => {
+      if (!data) {
+        return res.status(404).send({
+          message: `Building ID ${req.params.id} was not found`
+        });
+      }
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+                    err.message || 'Some error ocurred while retrieving buildings'
+      });
+    });
+};
+
+// Get building by address
+exports.getBuildingByAddress = (req, res) => {
+  Buildings.find({ address: req.params.address })
+    .then(data => {
+      if (!data) {
+        return res.status(404).send({
+          message: `No Buildings with address: "${req.params.address}" were found`
+        });
+      };
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+                    err.message || 'Some error ocurred while retrieving buildings'
+      });
+    });
+};
+
+// Get building by boiler id
+exports.getBuildingByBoilerId = (req, res) => {
+  Buildings.find({ boilersId: req.params.boilersId })
+    .then(data => {
+      if (!data) {
+        return res.status(404).send({
+          message: `No Buildings with boiler id: "${req.params.boilersId}" were found`
+        });
+      };
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+                    err.message || 'Some error ocurred while retrieving buildings'
+      });
+    });
+};
+
+// Get building by full name
+exports.getBuildingByFullName = (req, res) => {
+  Buildings.find({ fullName: req.params.fullName })
+    .then(data => {
+      if (!data) {
+        return res.status(404).send({
+          message: `No Buildings with Name: "${req.params.fullName}" were found`
+        });
+      };
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+                    err.message || 'Some error ocurred while retrieving buildings'
+      });
+    });
+};
+
+// Get building by phone
+exports.getBuildingByPhone = (req, res) => {
+  Buildings.find({ phone: req.params.phone })
+    .then(data => {
+      if (!data) {
+        return res.status(404).send({
+          message: `No Buildings with phone: "${req.params.phone}" were found`
+        });
+      };
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+                    err.message || 'Some error ocurred while retrieving buildings'
+      });
+    });
+};
+
+// Update a building
 exports.updateBuilding = (req, res) => {
   if (!req.body) {
     return res.status(400).send({
@@ -61,7 +157,8 @@ exports.updateBuilding = (req, res) => {
       };
     });
 };
-// deleteBuildingById
+
+// Delete a building by id
 exports.deleteById = (req, res) => {
   Buildings.findOneAndRemove({ id: req.params.id }, { useFindAndModify: false })
     .then(data => {
@@ -71,96 +168,6 @@ exports.deleteById = (req, res) => {
       res.status(500).send({
         message:
                         err.message || `Building ID ${req.params.id} can't be deleted`
-      });
-    });
-};
-
-// BYATTRIBUTES
-
-// getBuldingById
-exports.getBuildingById = (req, res) => {
-  Buildings.findOne({ id: req.params.id })
-    .then(data => {
-      if (!data) {
-        return res.status(404).send({
-          message: `Building ID ${req.params.id} was not found`
-        });
-      }
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-                    err.message || 'Some error ocurred while retrieving buildings'
-      });
-    });
-};
-
-exports.getBuildingByAddress = (req, res) => {
-  Buildings.find({ address: req.params.address })
-    .then(data => {
-      if (!data) {
-        return res.status(404).send({
-          message: `No Buildings with address: "${req.params.address}" were found`
-        });
-      };
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-                    err.message || 'Some error ocurred while retrieving buildings'
-      });
-    });
-};
-exports.getBuildingByBoilerId = (req, res) => {
-  Buildings.find({ boilersId: req.params.boilersId })
-    .then(data => {
-      if (!data) {
-        return res.status(404).send({
-          message: `No Buildings with boiler id: "${req.params.boilersId}" were found`
-        });
-      };
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-                    err.message || 'Some error ocurred while retrieving buildings'
-      });
-    });
-};
-exports.getBuildingByFullName = (req, res) => {
-  Buildings.find({ fullName: req.params.fullName })
-    .then(data => {
-      if (!data) {
-        return res.status(404).send({
-          message: `No Buildings with Name: "${req.params.fullName}" were found`
-        });
-      };
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-                    err.message || 'Some error ocurred while retrieving buildings'
-      });
-    });
-};
-exports.getBuildingByPhone = (req, res) => {
-  Buildings.find({ phone: req.params.phone })
-    .then(data => {
-      if (!data) {
-        return res.status(404).send({
-          message: `No Buildings with phone: "${req.params.phone}" were found`
-        });
-      };
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-                    err.message || 'Some error ocurred while retrieving buildings'
       });
     });
 };
