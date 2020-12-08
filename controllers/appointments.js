@@ -1,5 +1,5 @@
-const db = require('../models');
-const Appointments = db.appointments;
+const mongoose = require('mongoose');
+const Appointments = require('../models/appointments.js')(mongoose);
 
 exports.create = (req, res) => {
   if (!req.body.boilerId || !req.body.buildingId || !req.body.start_timestamp || !req.body.end_timestamp) {

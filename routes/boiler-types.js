@@ -1,4 +1,4 @@
-const boilerTypes = require('../controllers/boiler-types-controllers.js');
+const boilerTypes = require('../controllers/boiler-types.js');
 const router = require('express').Router();
 
 // boiler-types
