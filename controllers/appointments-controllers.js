@@ -1,6 +1,7 @@
-const db = require('../models');
-const Appointments = db.appointments;
+const mongoose = require('mongoose');
+const Appointments = require('../models/Appointments.js')(mongoose);
 
+// Create appointment
 exports.create = (req, res) => {
   if (!req.body.boilerId || !req.body.buildingId || !req.body.start_timestamp || !req.body.end_timestamp) {
     return res.status(400).send({
@@ -27,6 +28,7 @@ exports.create = (req, res) => {
     });
 };
 
+// Get all appointments
 exports.findAll = (req, res) => {
   Appointments.find({})
     .then(data => {
@@ -40,6 +42,7 @@ exports.findAll = (req, res) => {
     });
 };
 
+// Get appointment by id
 exports.findOne = (req, res) => {
   Appointments.findOne({ id: req.params.id })
     .then(data => {
@@ -58,6 +61,7 @@ exports.findOne = (req, res) => {
     });
 };
 
+// Get appointment by start timestamp
 exports.findOneStart = (req, res) => {
   const fechaInicial = req.params.value;
   const fechaFinal = fechaInicial.substring(0, 8).concat(Number(fechaInicial.substring(8)) + 1);
@@ -78,6 +82,7 @@ exports.findOneStart = (req, res) => {
     });
 };
 
+// Get appointment by end timestamp
 exports.findOneEnd = (req, res) => {
   Appointments.find({ end_timestamp: { $gt: new Date(req.params.value) } })
     .then(data => {
@@ -96,6 +101,7 @@ exports.findOneEnd = (req, res) => {
     });
 };
 
+// Update an appointment
 exports.update = (req, res) => {
   if (!req.body) {
     return res.status(400).send({
@@ -119,6 +125,7 @@ exports.update = (req, res) => {
     });
 };
 
+// Delete an appointment
 exports.delete = (req, res) => {
   const id = req.params.id;
   Appointments.findOneAndRemove({ id }, { useFindAndModify: false })

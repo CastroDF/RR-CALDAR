@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const Technicians = require('../models/technicians-data.js')(mongoose);
+const Technicians = require('../models/technicians.js')(mongoose);
 
-// Crate technicians
+// Create technicians
 exports.create = (req, res) => {
   if (!req.body.id || !req.body.first_name || !req.body.last_name || !req.body.email || !req.body.typeIds || !req.body.skillsId || !req.body.hour_rate || !req.body.daily_capacity) {
     return res.status(400).send({
@@ -30,6 +30,7 @@ exports.create = (req, res) => {
       });
     });
 };
+
 // Get all technicians
 exports.findAll = (req, res) => {
   Technicians.find({})
@@ -42,7 +43,7 @@ exports.findAll = (req, res) => {
     });
 };
 
-// Get a single technicians by id
+// Get technician by id
 exports.findOne = (req, res) => {
   Technicians.findOne({ id: req.params.id })
     .then(data => {
@@ -61,7 +62,7 @@ exports.findOne = (req, res) => {
     });
 };
 
-// Update a Technician
+// Update a technician
 exports.update = (req, res) => {
   if (!req.body) {
     return res.status(400).send({
@@ -85,7 +86,7 @@ exports.update = (req, res) => {
     });
 };
 
-// Delete a technicians by id
+// Delete technician by id
 exports.deleteById = (req, res) => {
   Technicians.findOneAndRemove({ id: req.params.id }, { useFindAndModify: false })
     .then(data => {

@@ -1,6 +1,7 @@
-const db = require("../models");
-const BoilerTypes = db.boilerTypes;
+const mongoose = require('mongoose');
+const BoilerTypes = require('../models/BoilerTypes.js')(mongoose);
 
+// Create boiler type
 exports.create = (req, res)  => {
     if(!req.body.skillsId || !req.body.description || !req.body.stock){
         return res.status(400).send({
@@ -26,6 +27,7 @@ exports.create = (req, res)  => {
         });
 };
 
+// Get all technicians
 exports.findAll = (req, res) => {
     BoilerTypes.find({})
         .then(data =>{
@@ -39,6 +41,7 @@ exports.findAll = (req, res) => {
         });
 };
 
+// Get boiler type by id
 exports.findOne = (req, res) =>{
     BoilerTypes.findOne({id: req.params.id})
         .then(data =>{
@@ -57,6 +60,7 @@ exports.findOne = (req, res) =>{
         });
 };
 
+// Get boiler type by stock
 exports.findOneStock = (req, res) =>{
     BoilerTypes.findOne({stock: req.params.value})
         .then(data =>{
@@ -75,6 +79,7 @@ exports.findOneStock = (req, res) =>{
         });
 };
 
+// Update a boiler type
 exports.update = (req, res) => {
     if(!req.body){
         return res.status(400).send({
@@ -98,6 +103,7 @@ exports.update = (req, res) => {
         })
 }
 
+// Delete boiler type by id
 exports.delete = (req, res) =>{
     const id = req.params.id;
     BoilerTypes.findOneAndRemove({id}, { useFindAndModify: false })
