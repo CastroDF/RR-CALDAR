@@ -59,16 +59,16 @@ exports.findOne = (req, res) => {
 };
 
 exports.findOneStart = (req, res) => {
-  const fechaInicial = req.params.value;
-  const fechaFinal = fechaInicial.substring(0, 8).concat(Number(fechaInicial.substring(8)) + 1);
-  Appointments.find({ start_timestamp: { $gt: new Date(fechaInicial).toISOString(), $lt: new Date(fechaFinal).toISOString() } })
+  const startDate = req.params.value;
+  const endDate = startDate.substring(0, 8).concat(Number(startDate.substring(8)) + 1);
+  Appointments.findOne({ start_timestamp: { $gte: new Date(startDate), $lt: new Date(endDate) } })
     .then(data => {
       if (!data) {
         return res.status(404).send({
           message: `Appointments with date start ${req.params.value} was not found`
         });
       }
-      res.send('el valor es:' + data);
+      res.send(data);
     })
     .catch(err => {
       res.status(500).send({
