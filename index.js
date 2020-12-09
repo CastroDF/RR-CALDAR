@@ -11,8 +11,6 @@ const PORT = process.env.PORT || 4000;
 // App
 const app = express();
 
-const db = {};
-
 // Support parsing of application/json type post data
 app.use(bodyParser.json());
 
@@ -28,20 +26,22 @@ const MONGO_DB_PASSWORD = process.env.MONGO_DB_PASSWORD;
 const MONGO_DB_DATABASE = process.env.MONGO_DB_DATABASE;
 
 // Establish connection
+const db = {};
 db.mongoose = mongoose;
 db.url = `mongodb+srv://${MONGO_DB_USER}:${MONGO_DB_PASSWORD}@cluster0.wl5wc.mongodb.net/${MONGO_DB_DATABASE}?retryWrites=true&w=majority`;
-db.Technicians = require('./models/technicians');
-db.BoilerTypes = require('./models/boiler-types');
 db.Appointments = require('./models/appointments');
-db.Buildings = require('./models/buildings');
 db.Boilers = require('./models/boilers');
+db.BoilerTypes = require('./models/boiler-types');
+db.Buildings = require('./models/buildings');
+db.Customers = require('./models/customers.js');
+db.Technicians = require('./models/technicians');
 db.mongoose
   .connect(db.url, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
   .then(() => {
-    console.log('connected to the database');
+    console.log('Connected to the database, Successfully !');
   })
   .catch(err => {
     console.log('Cannot connect to the database!', err);

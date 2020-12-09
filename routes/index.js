@@ -1,21 +1,16 @@
-// const { route } = require('./technicians');
-const techniciansRouter = require('./technicians');
-const buildingsRouter = require('./building');
+const appointmentsRouter = require('./appointments');
 const boilersRouter = require('./boilers');
-
+const boilerTypesRouter = require('./boiler-types');
+const buildingsRouter = require('./building');
+const customersRouter = require('./customers');
+const techniciansRouter = require('./technicians');
 const router = require('express').Router();
 
-router.use('/technicians', techniciansRouter);
-router.use('/buildings', buildingsRouter);
-router.use('/boilers', boilersRouter);
-
-// const { routeBoilerTypes } =  require('./boiler-types');
-const boilerTypesRouter = require('./boiler-types.js');
-
-// const { routeAppointments } =  require('./appointments');
-const appointmentsRouter = require('./appointments.js');
-
-router.use('/boiler-types', boilerTypesRouter);
 router.use('/appointments', appointmentsRouter);
+router.use('/boilers', boilersRouter);
+router.use('/boiler-types', boilerTypesRouter);
+router.use('/buildings', buildingsRouter);
+router.use('/customers', customersRouter);
+router.use('/technicians', techniciansRouter);
 
 module.exports = router;

@@ -90,7 +90,7 @@ exports.update = (req, res) => {
 exports.deleteById = (req, res) => {
   Technicians.findOneAndRemove({ id: req.params.id }, { useFindAndModify: false })
     .then(data => {
-      res.send({ message: 'A technician was removed successifully' });
+      res.send({ message: 'A technician was removed successfully' });
     })
     .catch(err => {
       res.status(500).send({
