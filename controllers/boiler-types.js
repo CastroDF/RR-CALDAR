@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const BoilerTypes = require('../models/BoilerTypes.js')(mongoose);
+const BoilerTypes = require('../models/boiler-types.js')(mongoose);
 
 // Create boiler type
 exports.create = (req, res)  => {
