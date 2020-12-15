@@ -1,34 +1,22 @@
 import React, { Component } from "react";
 import "./BoilerTypeId.css";
-//import { Timestamp } from "mongodb";
-import datos from '../../data/boiler-types.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {Button} from 'reactstrap';
 
-console.log(datos);
 
 export class BoilerTypeId extends Component{
-    state = {
-        boilertype: datos
-    }
 
-    handleDelete = () => this.props.delBoilerType(this.props.boilertype.id)
-    handleEdit = () => this.props.editBoilerType(this.props.boilertype.id)
+    //handleDelete = () => this.props.delBoilerType(this.props.boilertype.id)
+    //handleEdit = () => this.props.editBoilerType(this.props.boilertype.id)
     render () {
-        const { id, skillId, description, stock } = this.boilertype;
         return (
-            <div>
-                <table>
-                {this.state.boilertype.map(e =>
                     <tr>
-                        <td>key={e.id}</td>
-                        <td>skillid={e.skillId}</td>
-                        <td>description={e.description}</td>
-                        <td>stock={e.stock}</td>
-                        <button onclick={this.handleEdit} className="edit-btn">Edit</button>
-                        <button onclick={this.handleDelete} className="delete-btn">Delete</button>
+                        <td>{this.props.boilertype.id}</td>
+                        <td>{this.props.boilertype.description}</td>
+                        <td>{this.props.boilertype.stock}</td>
+                        <td><Button color="primary" >Edit</Button>
+                        <Button color="danger"  >Delete</Button></td>
                     </tr>
-                )}
-                </table>
-            </div>
         )
     }
 }
